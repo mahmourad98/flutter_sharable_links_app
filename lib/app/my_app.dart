@@ -40,9 +40,22 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            Text('Navigate From Here', style: TextStyle(fontSize: 18.0,),),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const Divider(height: 12.0,),
+            const Text('Navigate From Here', style: TextStyle(fontSize: 18.0,),),
+            const Divider(height: 12.0,),
+            TextButton(
+              onPressed: () => {
+                Navigator.of(context,).pushNamed(RouteNames.copyAndPastePage,),
+              },
+              child: const Text('To Copy & Paste',),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor:  Colors.blueAccent,
+                textStyle: const TextStyle(fontSize: 18.0,),
+              ),
+            ),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.

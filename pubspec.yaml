@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: any
   material_design_icons_flutter: any
   intl: any
+  share_plus: any
 
 dev_dependencies:
   flutter_test:

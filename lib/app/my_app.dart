@@ -56,6 +56,18 @@ class MyHomePage extends StatelessWidget {
                 textStyle: const TextStyle(fontSize: 18.0,),
               ),
             ),
+            const Divider(height: 12.0,),
+            TextButton(
+              onPressed: () => {
+                Navigator.of(context,).pushNamed(RouteNames.shareTextPage,),
+              },
+              child: const Text('To Sharing Text',),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor:  Colors.blueAccent,
+                textStyle: const TextStyle(fontSize: 18.0,),
+              ),
+            ),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.

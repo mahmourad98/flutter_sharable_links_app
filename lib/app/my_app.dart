@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled02/app/my_app_router.dart';
+import 'package:untitled02/core/delegations/services/receive_shared_content.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key,}) : super(key: key,);
@@ -9,7 +10,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context,) {
     return MaterialApp(
       title: 'Flutter Demo',
-      builder: (buildContext, childWidget,) => SafeArea(child: childWidget!,),
+      builder: (buildContext, childWidget,) {
+        ReceiveSharedContentService.initService();
+        if(!(ReceiveSharedContentService.locationDataStreamController?.hasListener ?? false)) {
+          ReceiveSharedContentService.locationDataStreamController?.stream.listen(
+            (event,) => {
+              ReceiveSharedContentService.messages.add(event,),
+              navKey.currentState?.pushNamed(
+                RouteNames.receiveSharedContent, arguments: ReceiveSharedContentViewArgs(ReceiveSharedContentService.messages,),
+              ),
+            },
+          );
+        }
+        return SafeArea(child: childWidget!,);
+      },
       locale: const Locale('en',),
       supportedLocales: const [Locale('en',),],
       localizationsDelegates: const [
@@ -62,6 +76,18 @@ class MyHomePage extends StatelessWidget {
                 Navigator.of(context,).pushNamed(RouteNames.shareTextPage,),
               },
               child: const Text('To Sharing Text',),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor:  Colors.blueAccent,
+                textStyle: const TextStyle(fontSize: 18.0,),
+              ),
+            ),
+            const Divider(height: 12.0,),
+            TextButton(
+              onPressed: () => {
+                Navigator.of(context,).pushNamed(RouteNames.receiveSharedContent,),
+              },
+              child: const Text('To Receive Shared Text',),
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor:  Colors.blueAccent,

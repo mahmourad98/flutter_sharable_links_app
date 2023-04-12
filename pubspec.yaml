@@ -16,6 +16,7 @@ dependencies:
   material_design_icons_flutter: any
   intl: any
   share_plus: any
+  receive_sharing_intent: any
 
 dev_dependencies:
   flutter_test:
